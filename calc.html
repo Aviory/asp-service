@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<body>
+    a:
+    <input type="text" id="txtA" id="btn" value="" />
+    <br>
+    b:
+    <input type="text" id="txtB" id="btn" value="" />
+    <br>
+    op:
+    <input type="text" id="txtOp" id="btn" value="" />
+    <br>
+    Result
+    <input type="text" id="txtResalt" id="btn" value="" />
+    <br>
+    <input type="button" id="btn=" value="=" onclick="numBtn_Click()" />
+
+
+
+    <script>
+
+        function numBtn_Click(sender) {
+          //  var a = parseInt(txtA.value);
+          //  var b = parseInt(txtB.value);
+            var Op = txtOp.value;
+
+            var param = "num1=" + txtA.value + "&num2=" + txtB.value + "&op=" + Op;
+
+            var con = new XMLHttpRequest();
+            con.open('POST', 'http://localhost:1625/Webf.asmx/Math', false);
+            con.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            con.send(param);
+            var result = con.responseText;
+            alert(result);
+            //txtResalt.value = result;
+            // 4. Если код ответа сервера не 200, то это ошибка
+            if (con.status != 200) {
+                // обработать ошибку
+                alert(con.status + ': ' + con.statusText); // пример вывода: 404: Not Found
+            }
+        }
+
+    </script>
+
+
+</body>
+</html>
